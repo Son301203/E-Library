@@ -53,8 +53,6 @@ public class SignUpActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         String userId = auth.getCurrentUser().getUid();
                         saveUserToFirestore(userId, email, password, username);
-                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                        startActivity(intent);
                         finish();
                     } else {
                         Toast.makeText(this, "Sign Up Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
