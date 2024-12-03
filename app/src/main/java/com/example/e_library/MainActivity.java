@@ -1,94 +1,58 @@
 package com.example.e_library;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ListView;
-import android.widget.SearchView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-
-import java.util.*;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView bookListView;
-    private SearchView searchView;
-    private BookList bookAdapter;
-    private List<Book> bookList = new ArrayList<>();
-    private List<Book> filteredList = new ArrayList<>();
+    private FirebaseAuth auth;
+    private EditText emailInput, passwordInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bookListView = findViewById(R.id.bookListView);
-        searchView = findViewById(R.id.searchView);
+        auth = FirebaseAuth.getInstance();
 
-        // Initialize adapter and set to ListView
-        bookAdapter = new BookList(this, filteredList); // Use filteredList for display
-        bookListView.setAdapter(bookAdapter);
+        emailInput = findViewById(R.id.emailInput);
+        passwordInput = findViewById(R.id.passwordInput);
 
-        // Fetch data from Firestore
-        fetchBooksFromFirestore();
+        Button loginButton = findViewById(R.id.loginButton);
+        Button goToSignUpButton = findViewById(R.id.goToSignUpButton);
 
-        // Set up search functionality
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                filterBooks(query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterBooks(newText);
-                return true;
-            }
+        loginButton.setOnClickListener(v -> loginUser());
+        goToSignUpButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+            startActivity(intent);
         });
     }
 
-    private void fetchBooksFromFirestore() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("books")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    bookList.clear();
-                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        Book book = document.toObject(Book.class);
-                        bookList.add(book);
-                    }
+    private void loginUser() {
+        String email = emailInput.getText().toString();
+        String password = passwordInput.getText().toString();
 
-                    Collections.sort(bookList, new Comparator<Book>() {
-                        @Override
-                        public int compare(Book book1, Book book2) {
-                            return book1.getTitle().compareToIgnoreCase(book2.getTitle());
-                        }
-                    });
-
-                    // Initially show all books
-                    filteredList.clear();
-                    filteredList.addAll(bookList);
-                    bookAdapter.notifyDataSetChanged();
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(this, "Error fetching data: " + e.getMessage(), Toast.LENGTH_SHORT).show());
-    }
-
-    private void filterBooks(String query) {
-        filteredList.clear();
-        if (query.isEmpty()) {
-            filteredList.addAll(bookList); // Show all books if query is empty
-        } else {
-            for (Book book : bookList) {
-                if (book.getTitle().toLowerCase().contains(query.toLowerCase())) {
-                    filteredList.add(book);
-                }
-            }
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Email and Password are required!", Toast.LENGTH_SHORT).show();
+            return;
         }
-        bookAdapter.notifyDataSetChanged();
+
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, BookListActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Login Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
