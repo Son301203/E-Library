@@ -36,6 +36,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-auth")
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

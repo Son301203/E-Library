@@ -15,6 +15,12 @@
         android:theme="@style/Theme.E_Library"
         tools:targetApi="31">
         <activity
+            android:name=".RegisteredBooksActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BorrowedBooksActivity"
+            android:exported="false" />
+        <activity
             android:name=".UserInfoActivity"
             android:exported="false" />
         <activity
