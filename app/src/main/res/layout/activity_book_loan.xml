@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -41,11 +40,11 @@
                 android:id="@+id/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sách"
-                android:textSize="20sp"
+                android:layout_centerInParent="true"
+                android:text="Phiếu mượn"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:layout_centerInParent="true" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <!-- Search Icon -->
             <ImageView
@@ -59,7 +58,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:padding="10dp" />
-
 
         </RelativeLayout>
 
@@ -108,7 +106,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tất cả"
+                    android:text="Ngày"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#1A73E8"
@@ -119,7 +117,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Thể loại"
+                    android:text="12/03/2021"
                     android:textSize="18sp"
                     android:textColor="#9E9E9E"
                     android:gravity="center" />
@@ -142,7 +140,7 @@
                     android:id="@+id/productCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3 sản phẩm"
+                    android:text="3 phiếu"
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:layout_gravity="start"
@@ -161,18 +159,71 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- ListView -->
-        <ListView
-            android:id="@+id/bookListView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:elevation="2dp"
-            app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabAndFilterLayout" />
+        <!-- Book Section - Move below the Product Count -->
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tabAndFilterLayout"
+            tools:ignore="ExtraText">  <!-- Added this constraint to move below the previous section -->
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="36dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/bookTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phiếu mượn số 1"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/bookAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số quyển sách: 3 quyển" />
+            </LinearLayout>
+
+            <!-- Delete Icon - positioned to the right -->
+            <ImageView
+                android:id="@+id/deleteIcon"
+                android:layout_width="26dp"
+                android:layout_height="64dp"
+                android:src="@drawable/icon_delete"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:contentDescription="Delete Icon"
+                android:layout_marginTop="8dp"
+                android:layout_alignParentEnd="true" />
+        </LinearLayout>
+
+        <!-- Add Borrowed Book Button -->
 
         <!-- Bottom Navigation -->
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="180dp"
+            android:layout_marginTop="632dp"
+            android:backgroundTint="#4A90E2"
+            android:padding="12dp"
+            android:text="+ Thêm phiếu mượn sách"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <include
             android:id="@+id/bottomNavigation"
             layout="@layout/activity_bottom_base"

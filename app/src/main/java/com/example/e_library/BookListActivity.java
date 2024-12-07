@@ -1,11 +1,16 @@
 package com.example.e_library;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -28,8 +33,40 @@ public class BookListActivity extends AppCompatActivity {
         bookListView = findViewById(R.id.bookListView);
         searchView = findViewById(R.id.searchView);
 
+        ImageView backIcon = findViewById(R.id.backIcon);
+        ImageView searchIcon = findViewById(R.id.searchIcon);
+        TextView titleText = findViewById(R.id.titleText);
+        ConstraintLayout parentLayout = findViewById(R.id.parentLayout);
+
+        // Nút Back
+        backIcon.setOnClickListener(view -> finish());
+
+        // Nút Search - Ẩn/Hiện SearchView khi nhấn
+        searchIcon.setOnClickListener(view -> {
+            if (searchView.getVisibility() == View.VISIBLE) {
+                searchView.setVisibility(View.GONE); // Ẩn SearchView nếu đang hiển thị
+            } else {
+                searchView.setVisibility(View.VISIBLE); // Hiển thị SearchView nếu chưa hiển thị
+            }
+        });
+
+        // Đặt sự kiện khi đóng SearchView
+        searchView.setOnCloseListener(() -> {
+            searchView.setVisibility(View.GONE);      // Ẩn SearchView
+            return false;
+        });
+
+        // Thu nhỏ SearchView khi nhấn ra ngoài
+        parentLayout.setOnTouchListener((v, event) -> {
+            if (searchView.getVisibility() == View.VISIBLE && event.getAction() == MotionEvent.ACTION_DOWN) {
+                // Đưa giao diện trở về trạng thái ban đầu
+                searchView.setVisibility(View.GONE);      // Ẩn SearchView
+            }
+            return false; // Cho phép các sự kiện khác vẫn được xử lý
+        });
+
         // Initialize adapter and set to ListView
-        bookAdapter = new BookList(this, filteredList); // Use filteredList for display
+        bookAdapter = new BookList(this, filteredList);
         bookListView.setAdapter(bookAdapter);
 
         // Fetch data from Firestore
@@ -49,6 +86,8 @@ public class BookListActivity extends AppCompatActivity {
                 return true;
             }
         });
+        // Thiết lập tab
+        TabUtils.setupTabs(this);
     }
 
     private void fetchBooksFromFirestore() {
@@ -91,4 +130,5 @@ public class BookListActivity extends AppCompatActivity {
         }
         bookAdapter.notifyDataSetChanged();
     }
+
 }

@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
             startActivity(intent);
         });
+        // Thiết lập tab
+        TabUtils.setupTabs(this);
     }
 
     private void loginUser() {

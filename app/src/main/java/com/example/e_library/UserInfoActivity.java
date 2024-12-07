@@ -3,6 +3,7 @@ package com.example.e_library;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,11 +29,12 @@ public class UserInfoActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
+        ImageView backIcon = findViewById(R.id.backIcon);
         emailTextView = findViewById(R.id.emailTextView);
         usernameTextView = findViewById(R.id.usernameTextView);
         logoutButton = findViewById(R.id.logoutButton);
-
+        // Nút Back
+        backIcon.setOnClickListener(view -> finish());
         // Fetch and display user information
         fetchUserInfo();
 
