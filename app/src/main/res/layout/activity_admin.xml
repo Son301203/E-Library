@@ -3,6 +3,7 @@
     android:layout_height="match_parent"
     android:padding="10dp">
 
+
     <Button
         android:id="@+id/scanner"
         android:layout_width="270dp"
@@ -29,11 +30,25 @@
         android:textSize="18sp"
         android:text="User Email will display here" />
 
+    <Button
+        android:id="@+id/lendButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/borrowedBooksList"
+        android:text="Lend Selected Books" />
+
+    <Button
+        android:id="@+id/toggleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lendButton"
+        android:text="Toggle to Borrowing Books" />
+
     <ListView
         android:id="@+id/borrowedBooksList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/userEmail"
         android:layout_marginTop="10dp" />
-    
+
 </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.e_library;
 
 public class BorrowedBook {
+    private String id;
     private String title;
     private String author;
     private String description;
@@ -13,7 +14,8 @@ public class BorrowedBook {
     public BorrowedBook() {}
 
     // Constructor
-    public BorrowedBook(String title, String author, String description, String publisher, String yearRelease, String image, long borrowedAt) {
+    public BorrowedBook(String id, String title, String author, String description, String publisher, String yearRelease, String image, long borrowedAt) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.description = description;
@@ -24,6 +26,14 @@ public class BorrowedBook {
     }
 
     // Getters and setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }

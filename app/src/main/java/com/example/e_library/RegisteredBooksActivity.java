@@ -1,6 +1,7 @@
 package com.example.e_library;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,7 +35,30 @@ public class RegisteredBooksActivity extends AppCompatActivity {
         adapter = new BorrowedBooksAdapter(this, borrowedBooks);
         booksListView.setAdapter(adapter);
 
+        Button unregisterButton = findViewById(R.id.unregisterButton);
+        unregisterButton.setOnClickListener(v -> unregisterSelectedBooks());
+
         fetchBorrowedBooks();
+    }
+
+    private void unregisterSelectedBooks() {
+        List<BorrowedBook> selectedBooks = adapter.getSelectedBooks();
+        String userId = auth.getCurrentUser().getUid();
+
+        for (BorrowedBook book : selectedBooks) {
+            db.collection("users")
+                    .document(userId)
+                    .collection("borrowed_books")
+                    .document(book.getId())
+                    .delete()
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(this, "Book unregistered: " + book.getTitle(), Toast.LENGTH_SHORT).show();
+                        borrowedBooks.remove(book);
+                        adapter.notifyDataSetChanged();
+                    })
+                    .addOnFailureListener(e ->
+                            Toast.makeText(this, "Failed to unregister: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        }
     }
 
     private void fetchBorrowedBooks() {

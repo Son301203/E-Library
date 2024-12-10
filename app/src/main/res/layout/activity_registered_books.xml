@@ -66,5 +66,23 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/unregisterButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Unregister Selected"
+            app:layout_constraintTop_toBottomOf="@id/booksListView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#4F91D7"
+            android:textColor="#FFFFFF"
+            android:padding="10dp"
+            android:textStyle="bold" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
