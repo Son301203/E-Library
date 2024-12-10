@@ -13,22 +13,19 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private TextView borrowedBooksCount;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    @Override
-    protected int getLayoutResourceId() {
-        return R.layout.activity_home;
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_home); // Thêm dòng này trước khi findViewById
         LinearLayout registeredBooksLayout = findViewById(R.id.registeredBooksLayout); // Add the correct ID
         registeredBooksLayout.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, RegisteredBooksActivity.class);
@@ -56,7 +53,8 @@ public class HomeActivity extends BaseActivity {
                 Toast.makeText(HomeActivity.this, "You need to log in first!", Toast.LENGTH_SHORT).show();
             }
         });
-
+        // Thiết lập tab
+        TabUtils.setupTabs(this);
         // Fetch and display borrowed books count
         fetchBorrowedBooksCount();
     }

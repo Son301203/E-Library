@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
-        tools:context=".MainActivity">
+        tools:context=".HomeActivity">
 
         <!-- Top Bar -->
         <LinearLayout
@@ -30,19 +30,19 @@
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
                 android:contentDescription="Account Icon"
-                android:src="@drawable/menu" />
+                android:src="@drawable/icon_menu" />
 
             <EditText
                 android:id="@+id/searchEditText"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:hint="Tìm kiếm"
                 android:background="#FFFFFF"
                 android:textColor="#999494"
                 android:padding="10dp"
                 android:layout_margin="5dp"
-                android:drawableStart="@drawable/search_icon"
+                android:drawableStart="@drawable/icon_search_black"
                 android:drawablePadding="10dp" />
 
             <ImageView
@@ -50,7 +50,7 @@
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
                 android:contentDescription="Note Icon"
-                android:src="@drawable/note" />
+                android:src="@drawable/icon_note" />
 
             <ImageView
                 android:id="@+id/accountIcon"
@@ -58,7 +58,7 @@
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
                 android:contentDescription="Account Icon"
-                android:src="@drawable/person" />
+                android:src="@drawable/icon_person" />
         </LinearLayout>
 
 
@@ -134,79 +134,84 @@
                 android:layout_height="wrap_content"
                 android:text="Danh mục yêu thích"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <!-- Hàng đầu tiên -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal">
+                android:layout_marginTop="20dp"
+                android:weightSum="3">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/booksTab"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="30dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    tools:ignore="UseCompoundDrawables">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:contentDescription="Books Icon"
-                        android:src="@drawable/group" />
+                        android:src="@drawable/icon_group" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:singleLine="false"
+                        android:ellipsize="none"
                         android:text="Sách"
                         android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/registeredBooksLayout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="30dp"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:contentDescription="Readers Icon"
-                        android:src="@drawable/user" />
+                        android:contentDescription="Book registration"
+                        android:src="@drawable/icon_user" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Sách đã đăng ký"
+                        android:gravity="center"
+                        android:text="Sách đã\nĐăng ký"
                         android:textSize="16sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:contentDescription="Reports Icon"
-                        android:src="@drawable/analyze" />
+                        android:contentDescription="Book on loan"
+                        android:src="@drawable/icon_analyze" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sách đang mượn"
-                        android:textSize="16sp" />
+                        android:gravity="center"
+                        android:text="Sách\nđang mượn"
+                    android:textSize="16sp" />
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -214,14 +219,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:weightSum="3">
 
                 <LinearLayout
-                    android:layout_width="108dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:contentDescription="Reports Icon"
+                        android:src="@drawable/icon_return_books" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Sách\nđã trả"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -229,16 +257,29 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:contentDescription="Readers Icon"
-                        android:src="@drawable/edit" />
+                        android:src="@drawable/icon_edit" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:singleLine="false"
+                        android:ellipsize="none"
                         android:text="Chỉnh sửa"
                         android:textSize="16sp" />
                 </LinearLayout>
-            </LinearLayout>
 
+                <!-- Thêm chỗ trống nếu cần cân bằng 3 cột -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
         </LinearLayout>
 
 
@@ -256,88 +297,99 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="30dp"
+                android:paddingBottom="10dp"
                 android:text="Đã xem gần đây"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
+            <!-- Hàng đầu tiên -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_marginTop="20dp"
+                android:weightSum="3">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="30dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    tools:ignore="UseCompoundDrawables">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:contentDescription="Books Icon"
-                        android:src="@drawable/group" />
-                    />
+                        android:src="@drawable/icon_group" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:singleLine="false"
+                        android:ellipsize="none"
                         android:text="Sách"
                         android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="30dp"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:contentDescription="Readers Icon"
-                        android:src="@drawable/user" />
+                        android:contentDescription="Book registration"
+                        android:src="@drawable/icon_user" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Độc giả"
+                        android:gravity="center"
+                        android:text="Sách đã\nĐăng ký"
                         android:textSize="16sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:contentDescription="Reports Icon"
-                        android:src="@drawable/analyze" />
+                        android:contentDescription="Book on loan"
+                        android:src="@drawable/icon_analyze" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Báo cáo"
+                        android:gravity="center"
+                        android:text="Sách\nđang mượn"
                         android:textSize="16sp" />
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
+
         <!-- Include bottom navigation -->
         <include
             android:id="@+id/bottomNavigation"
-            layout="@layout/activity_base"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            layout="@layout/activity_bottom_base"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -3,33 +3,121 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="#F8F8F8">
 
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/header_background"
+        android:gravity="center">
 
-    <EditText
-        android:id="@+id/userInput"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-80dp"
+            android:text="QUẢN LÝ THƯ VIỆN"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Form Container -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Username"
-        android:inputType="text" />
+        android:layout_marginTop="-150dp"
+        android:background="@drawable/rounded_background"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:padding="50dp">
 
-    <EditText
-        android:id="@+id/emailInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Email"
-        android:inputType="textEmailAddress" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:text="Đăng kí tài khoản"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/passwordInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Password"
-        android:inputType="textPassword" />
+        <!-- Username -->
+        <EditText
+            android:id="@+id/userInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/input_background"
+            android:hint="Tên đăng nhập*"
+            android:inputType="text"
+            android:padding="12dp" />
+        <!-- Username -->
+        <EditText
+            android:id="@+id/emailInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/input_background"
+            android:hint="Email đăng nhập*"
+            android:inputType="text"
+            android:padding="12dp" />
 
-    <Button
-        android:id="@+id/signUpButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sign Up" />
+        <!-- Password -->
+        <EditText
+            android:id="@+id/passwordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/input_background"
+            android:hint="Mật khẩu*"
+            android:inputType="textPassword"
+            android:padding="12dp" />
+
+        <!-- Re-enter Password -->
+        <EditText
+            android:id="@+id/rePasswordInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/input_background"
+            android:hint="Nhập lại mật khẩu*"
+            android:inputType="textPassword"
+            android:padding="12dp" />
+
+        <!-- Sign Up Button -->
+        <Button
+            android:id="@+id/signUpButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#4A90E2"
+            android:padding="12dp"
+            android:text="Đăng ký"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Go to Login Text -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nếu bạn đã có tài khoản"
+            android:textColor="#4A90E2"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+
+        <!-- Go to Login Button -->
+        <Button
+            android:id="@+id/goToLoginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:padding="12dp"
+            android:text="Đăng nhập"
+            android:textColor="#4A90E2"
+            android:textStyle="bold" />
+    </LinearLayout>
 </LinearLayout>

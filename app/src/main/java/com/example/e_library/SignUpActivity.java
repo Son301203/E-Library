@@ -34,9 +34,18 @@ public class SignUpActivity extends AppCompatActivity {
         userInput = findViewById(R.id.userInput);
 
         Button signUpButton = findViewById(R.id.signUpButton);
+        Button goToLoginButton = findViewById(R.id.goToLoginButton); // Nút quay lại đăng nhập
 
         signUpButton.setOnClickListener(v -> signUpUser());
+
+        // Xử lý quay lại màn hình đăng nhập
+        goToLoginButton.setOnClickListener(v -> {
+            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish(); // Kết thúc màn hình đăng ký
+        });
     }
+
 
     private void signUpUser() {
         String email = emailInput.getText().toString();

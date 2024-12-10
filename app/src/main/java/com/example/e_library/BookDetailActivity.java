@@ -25,6 +25,9 @@ public class BookDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
+        ImageView backIcon = findViewById(R.id.backIcon);
+        // Nút Back
+        backIcon.setOnClickListener(view -> finish());
 
         // Initialize Firebase
         auth = FirebaseAuth.getInstance();
@@ -57,7 +60,8 @@ public class BookDetailActivity extends AppCompatActivity {
         Glide.with(this)
                 .load(imageUrl)
                 .into(bookImage);
-
+        // Thiết lập tab
+        TabUtils.setupTabs(this);
         // Register borrow button functionality
         registerBorrowButton.setOnClickListener(v -> registerBorrowedBook(title, author, description, publisher, yearRelease, imageUrl));
     }
