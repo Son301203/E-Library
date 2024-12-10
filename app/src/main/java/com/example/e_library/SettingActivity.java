@@ -1,8 +1,10 @@
 package com.example.e_library;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -20,6 +22,8 @@ public class SettingActivity extends AppCompatActivity {
         TabUtils.setupTabs(this);
         setupListeners();
         setupSwitchColors(); // Gọi hàm thiết lập màu cho Switch
+
+
     }
 
     /**
@@ -47,6 +51,12 @@ public class SettingActivity extends AppCompatActivity {
         tvAbout.setOnClickListener(v ->
                 Toast.makeText(this, "About clicked", Toast.LENGTH_SHORT).show()
         );
+
+        Button btnCreateQr = findViewById(R.id.btnCreateQr);
+        btnCreateQr.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingActivity.this, GeneratorFragment.class);
+            startActivity(intent);
+        });
     }
 
     /**

@@ -158,9 +158,16 @@
 
                         android:contentDescription="Bật thông báo" />
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnCreateQr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
             </LinearLayout>
 
             <!-- Thông tin thêm -->
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -198,6 +205,7 @@
                     android:drawableEnd="@drawable/icon_arrow"
                     android:drawablePadding="10dp"
                     android:background="?android:attr/selectableItemBackground" />
+
             </LinearLayout>
         </LinearLayout>
 
