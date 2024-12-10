@@ -69,39 +69,56 @@ public class BookDetailActivity extends AppCompatActivity {
     private void registerBorrowedBook(String title, String author, String description, String publisher, String yearRelease, String imageUrl) {
         String userId = auth.getCurrentUser().getUid();
 
+        // Kiểm tra trong danh sách borrowing_books
         db.collection("users").document(userId)
-                .collection("borrowed_books")
+                .collection("borrowing_books")
                 .whereEqualTo("title", title)
                 .whereEqualTo("author", author)
                 .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        // User already borrowed the book
-                        Toast.makeText(BookDetailActivity.this, "You have already borrowed this book!", Toast.LENGTH_SHORT).show();
+                .addOnSuccessListener(borrowingSnapshots -> {
+                    if (!borrowingSnapshots.isEmpty()) {
+                        // Nếu sách đã có trong borrowing_books
+                        Toast.makeText(BookDetailActivity.this, "Bạn đang mượn sách này rồi!", Toast.LENGTH_SHORT).show();
                     } else {
-                        // Book is not borrowed yet; proceed to add it
-                        Map<String, Object> borrowedBook = new HashMap<>();
-                        borrowedBook.put("title", title);
-                        borrowedBook.put("author", author);
-                        borrowedBook.put("description", description);
-                        borrowedBook.put("publisher", publisher);
-                        borrowedBook.put("yearRelease", yearRelease);
-                        borrowedBook.put("image", imageUrl);
-                        borrowedBook.put("borrowedAt", System.currentTimeMillis());
-
+                        // Tiếp tục kiểm tra trong borrowed_books
                         db.collection("users").document(userId)
                                 .collection("borrowed_books")
-                                .add(borrowedBook)
-                                .addOnSuccessListener(documentReference ->
-                                        Toast.makeText(BookDetailActivity.this, "Book borrowed successfully!", Toast.LENGTH_SHORT).show()
-                                )
+                                .whereEqualTo("title", title)
+                                .whereEqualTo("author", author)
+                                .get()
+                                .addOnSuccessListener(borrowedSnapshots -> {
+                                    if (!borrowedSnapshots.isEmpty()) {
+                                        // Nếu sách đã có trong borrowed_books
+                                        Toast.makeText(BookDetailActivity.this, "Bạn đã đăng ký mượn sách này trước đó!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // Sách chưa được đăng ký, thêm vào borrowed_books
+                                        Map<String, Object> borrowedBook = new HashMap<>();
+                                        borrowedBook.put("title", title);
+                                        borrowedBook.put("author", author);
+                                        borrowedBook.put("description", description);
+                                        borrowedBook.put("publisher", publisher);
+                                        borrowedBook.put("yearRelease", yearRelease);
+                                        borrowedBook.put("image", imageUrl);
+                                        borrowedBook.put("borrowedAt", System.currentTimeMillis());
+
+                                        db.collection("users").document(userId)
+                                                .collection("borrowed_books")
+                                                .add(borrowedBook)
+                                                .addOnSuccessListener(documentReference ->
+                                                        Toast.makeText(BookDetailActivity.this, "Đăng ký mượn sách thành công!", Toast.LENGTH_SHORT).show()
+                                                )
+                                                .addOnFailureListener(e ->
+                                                        Toast.makeText(BookDetailActivity.this, "Lỗi khi đăng ký mượn sách: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                                                );
+                                    }
+                                })
                                 .addOnFailureListener(e ->
-                                        Toast.makeText(BookDetailActivity.this, "Failed to borrow book: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(BookDetailActivity.this, "Lỗi kiểm tra danh sách borrowed_books: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                                 );
                     }
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(BookDetailActivity.this, "Error checking borrowed books: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(BookDetailActivity.this, "Lỗi kiểm tra danh sách borrowing_books: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
     }
 

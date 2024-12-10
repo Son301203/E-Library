@@ -30,6 +30,7 @@ public class SettingActivity extends AppCompatActivity {
      * Hàm thiết lập sự kiện click và các lắng nghe khác
      */
     private void setupListeners() {
+
         // Nhấn vào "Account Settings"
         ImageView tvAccountSettings = findViewById(R.id.tvAccountSettings);
         tvAccountSettings.setOnClickListener(v ->
@@ -45,6 +46,13 @@ public class SettingActivity extends AppCompatActivity {
                 Toast.makeText(this, "Thông báo đã được tắt", Toast.LENGTH_SHORT).show();
             }
         });
+
+        TextView changeInfo = findViewById(R.id.changeInfo);
+        changeInfo.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingActivity.this, ChangeUserInfoActivity.class);
+            startActivity(intent);
+        });
+
 
         // Nhấn vào "About"
         TextView tvAbout = findViewById(R.id.tvAbout);

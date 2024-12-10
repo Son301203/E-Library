@@ -74,6 +74,9 @@ public class SignUpActivity extends AppCompatActivity {
         user.put("user_name", username); // Default name
         user.put("email", email);
         user.put("password", password);
+        user.put("full_name", "");
+        user.put("phone_number", "");
+        user.put("birthday", "");
 
         db.collection("users").document(userId)
                 .set(user)

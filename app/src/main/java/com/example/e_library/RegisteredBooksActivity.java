@@ -70,6 +70,7 @@ public class RegisteredBooksActivity extends AppCompatActivity {
                     borrowedBooks.clear();
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         BorrowedBook book = document.toObject(BorrowedBook.class);
+                        book.setId(document.getId()); // Gán ID của tài liệu từ Firestore
                         borrowedBooks.add(book);
                     }
                     adapter.notifyDataSetChanged();

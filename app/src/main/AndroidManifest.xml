@@ -15,6 +15,9 @@
         android:theme="@style/Theme.E_Library"
         tools:targetApi="31">
         <activity
+            android:name=".ChangeUserInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminActivity"
             android:exported="false" />
         <activity
