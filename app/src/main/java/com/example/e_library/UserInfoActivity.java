@@ -19,7 +19,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
 
-    private TextView emailTextView, usernameTextView;
+    private TextView emailTextView, usernameTextView, fullNameTextView, genderTextView, phoneNumberTextView, dateOfBirthTextView, idVerificationTextView;
     private Button logoutButton;
 
     @Override
@@ -33,6 +33,11 @@ public class UserInfoActivity extends AppCompatActivity {
         emailTextView = findViewById(R.id.emailTextView);
         usernameTextView = findViewById(R.id.usernameTextView);
         logoutButton = findViewById(R.id.logoutButton);
+        fullNameTextView = findViewById(R.id.fullNameTextView);
+        genderTextView = findViewById(R.id.genderTextView);
+        phoneNumberTextView= findViewById(R.id.phoneNumberTextView);
+        dateOfBirthTextView= findViewById(R.id.dobTextView);
+        idVerificationTextView = findViewById(R.id.idVerificationTextView);
         // Nút Back
         backIcon.setOnClickListener(view -> finish());
         // Fetch and display user information
@@ -57,13 +62,23 @@ public class UserInfoActivity extends AppCompatActivity {
                     if (documentSnapshot.exists()) {
                         String email = documentSnapshot.getString("email");
                         String username = documentSnapshot.getString("user_name");
+                        String fullName = documentSnapshot.getString("fullname");
+                        String phoneNumber = documentSnapshot.getString("phone_number");
+                        String dateOfBirth = documentSnapshot.getString("date_of_birth");
+                        String gender = documentSnapshot.getString("gender");
+                        String idVerification = documentSnapshot.getString("ID_verification");
 
-                        emailTextView.setText("Email: " + email);
-                        usernameTextView.setText("Username: " + username);
+                        usernameTextView.setText(username);
+                        emailTextView.setText(email);
+                        fullNameTextView.setText(fullName);
+                        phoneNumberTextView.setText(phoneNumber);
+                        dateOfBirthTextView.setText(dateOfBirth);
+                        idVerificationTextView.setText(idVerification);
+                        genderTextView.setText(gender);
                     } else {
-                        Toast.makeText(UserInfoActivity.this, "User data not found!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "User data not found!", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(e -> Toast.makeText(UserInfoActivity.this, "Error fetching user info: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(this, "Error fetching user info: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 }

@@ -75,10 +75,10 @@
 
         <!-- Tên tài khoản -->
         <TextView
+            android:id="@+id/profileUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="Bùi Văn A"
             android:textSize="16sp"
             android:gravity="center_vertical"
             android:layout_gravity="center_vertical" />

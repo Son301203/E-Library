@@ -86,6 +86,51 @@
         android:layout_marginEnd="16dp"
         android:text="Username" />
 
+    <TextView
+        android:id="@+id/idVerificationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ID Verification"
+        android:padding="12dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_background" />
+
+    <TextView
+        android:id="@+id/fullNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Full Name"
+        android:padding="12dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_background" />
+
+    <TextView
+        android:id="@+id/genderTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Gender"
+        android:padding="12dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_background" />
+    <TextView
+        android:id="@+id/phoneNumberTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone Number"
+        android:padding="12dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_background" />
+
+
+    <TextView
+        android:id="@+id/dobTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date of Birth"
+        android:padding="12dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/rounded_background" />
+
     <!-- Logout Button -->
     <Button
         android:id="@+id/logoutButton"

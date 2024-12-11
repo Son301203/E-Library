@@ -13,8 +13,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SettingActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+public class SettingActivity extends AppCompatActivity {
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
+
+    private TextView profileUsername;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +29,28 @@ public class SettingActivity extends AppCompatActivity {
         setupListeners();
         setupSwitchColors(); // Gọi hàm thiết lập màu cho Switch
 
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
+        profileUsername = findViewById(R.id.profileUsername);
+
+        fetchUserInfo();
     }
+
+    private void fetchUserInfo() {
+        String userId = auth.getCurrentUser().getUid();
+
+        db.collection("users").document(userId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String username = documentSnapshot.getString("user_name");
+                        profileUsername.setText(username);
+                    }
+                })
+                .addOnFailureListener(e -> Toast.makeText(this, "Error fetching user info: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+    }
+
 
     /**
      * Hàm thiết lập sự kiện click và các lắng nghe khác

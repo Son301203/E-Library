@@ -21,8 +21,6 @@ public class HomeActivity extends AppCompatActivity {
     private TextView borrowingBooksCount;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

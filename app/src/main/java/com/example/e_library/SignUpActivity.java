@@ -40,8 +40,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Xử lý quay lại màn hình đăng nhập
         goToLoginButton.setOnClickListener(v -> {
-            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-            startActivity(intent);
             finish(); // Kết thúc màn hình đăng ký
         });
     }
@@ -74,9 +72,11 @@ public class SignUpActivity extends AppCompatActivity {
         user.put("user_name", username); // Default name
         user.put("email", email);
         user.put("password", password);
-        user.put("full_name", "");
+        user.put("fullname", "");
+        user.put("gender", "");
+        user.put("ID_verification", "");
+        user.put("date_of_birth", "");
         user.put("phone_number", "");
-        user.put("birthday", "");
 
         db.collection("users").document(userId)
                 .set(user)
