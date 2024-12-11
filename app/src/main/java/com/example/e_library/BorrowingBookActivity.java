@@ -13,42 +13,42 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-public class BookReturnActivity extends AppCompatActivity {
+public class BorrowingBookActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private ListView booksListView;
-    private BookReturnAdapter adapter;
-    private List<BorrowedBook> returnBook;
+    private BorrowingBookAdapter adapter;
+    private List<BorrowedBook> borrowingBooks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_return);
+        setContentView(R.layout.activity_borrowing_book);
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
         booksListView = findViewById(R.id.booksListViewBorrowing);
-        returnBook = new ArrayList<>();
-        adapter = new BookReturnAdapter(this, returnBook);
+        borrowingBooks = new ArrayList<>();
+        adapter = new BorrowingBookAdapter(this, borrowingBooks);
         booksListView.setAdapter(adapter);
 
 
-        fetchReturnBooks();
+        fetchBorrowedBooks();
     }
 
-    private void fetchReturnBooks() {
+    private void fetchBorrowedBooks() {
         String userId = auth.getCurrentUser().getUid();
         db.collection("users").document(userId)
-                .collection("return_books")
+                .collection("borrowing_books")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    returnBook.clear();
+                    borrowingBooks.clear();
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         BorrowedBook book = document.toObject(BorrowedBook.class);
 //                        book.setId(document.getId()); // Gán ID của tài liệu từ Firestore
-                        returnBook.add(book);
+                        borrowingBooks.add(book);
                     }
                     adapter.notifyDataSetChanged();
                 })

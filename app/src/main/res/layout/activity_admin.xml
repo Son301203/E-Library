@@ -44,6 +44,13 @@
         android:layout_below="@id/lendButton"
         android:text="Toggle to Borrowing Books" />
 
+    <Button
+        android:id="@+id/returnButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toggleView"
+        android:text="Tra sach" />
+
     <ListView
         android:id="@+id/borrowedBooksList"
         android:layout_width="match_parent"

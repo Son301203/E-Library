@@ -2,7 +2,6 @@ package com.example.e_library;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.View;
 import android.widget.LinearLayout;
 
 public class TabManager {
@@ -35,7 +34,7 @@ public class TabManager {
         // Book Loan Tab
         if (bookLoanTab != null) {
             bookLoanTab.setOnClickListener(v -> {
-                Intent intent = new Intent(context, BookLoanActivity.class);
+                Intent intent = new Intent(context, BorrowingBookActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 context.startActivity(intent);
             });

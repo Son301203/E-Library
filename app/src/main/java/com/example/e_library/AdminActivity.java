@@ -37,6 +37,7 @@ public class AdminActivity extends AppCompatActivity {
 
         Button scanBtn = findViewById(R.id.scanner);
         Button lendBtn = findViewById(R.id.lendButton);
+        Button returnBtn = findViewById(R.id.returnButton);
         Button toggleViewBtn = findViewById(R.id.toggleView);
         qrResultText = findViewById(R.id.text);
         userEmailText = findViewById(R.id.userEmail);
@@ -57,6 +58,8 @@ public class AdminActivity extends AppCompatActivity {
 
         lendBtn.setOnClickListener(v -> lendSelectedBooks());
 
+        returnBtn.setOnClickListener(v -> returnSelectedBooks());
+
         toggleViewBtn.setOnClickListener(v -> toggleViewMode());
     }
 
@@ -73,6 +76,21 @@ public class AdminActivity extends AppCompatActivity {
         }
 
         fetchBorrowedBooks(userId);
+    }
+
+    private void returnSelectedBooks() {
+        List<BorrowedBook> selectedBooks = borrowedBooksAdapter.getSelectedBooks();
+        String userId = qrResultText.getText().toString().replace("Scanned ID: ", "");
+
+        for (BorrowedBook book : selectedBooks) {
+            db.collection("users").document(userId).collection("borrowing_books")
+                    .document(book.getId()).delete();
+
+            db.collection("users").document(userId).collection("return_books")
+                    .document(book.getId()).set(book);
+        }
+
+        fetchBorrowingBooks(userId);
     }
 
     private boolean isBorrowedBooksView = true;
