@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         String password = passwordInput.getText().toString();
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Email and Password are required!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Email và Mật khẩu là bắt buộc!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(MainActivity.this, HomeActivity.class));
                             finish();
                         } else {
-                            Toast.makeText(this, "Login Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Đăng nhập thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }

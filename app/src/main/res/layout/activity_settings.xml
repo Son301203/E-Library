@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Icon cài đặt -->
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -25,7 +25,6 @@
             android:contentDescription="Settings Icon"
             android:layout_gravity="center_vertical" />
 
-        <!-- Tiêu đề -->
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
@@ -37,14 +36,6 @@
             android:gravity="center"
             android:layout_gravity="center_vertical" />
 
-        <!-- Logout Button -->
-        <ImageView
-            android:id="@+id/tvAccountSettings"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/icon_logout_black"
-            android:contentDescription="Sync Icon"
-            android:layout_gravity="center_vertical" />
     </LinearLayout>
 
     <!-- Thông tin tài khoản -->
@@ -59,8 +50,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Ảnh đại diện -->
-
         <ImageView
             android:id="@+id/profileImageView"
             android:layout_width="60dp"
@@ -73,14 +62,20 @@
             android:clipToOutline="true"
             android:outlineProvider="background" />
 
-        <!-- Tên tài khoản -->
         <TextView
             android:id="@+id/profileUsername"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_weight="1"
             android:textSize="16sp"
             android:gravity="center_vertical"
+            android:layout_gravity="center_vertical" />
+        <ImageView
+            android:id="@+id/logoutButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_logout_black"
+            android:contentDescription="Logout Icon"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
 
@@ -99,7 +94,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Thiết lập tài khoản -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,7 +112,6 @@
                 android:elevation="1dp"
                 android:layout_marginBottom="10dp">
 
-                <!-- Chỉnh sửa thông tin -->
                 <TextView
                     android:id="@+id/changeInfo"
                     android:layout_width="match_parent"
@@ -129,7 +122,6 @@
                     android:drawablePadding="10dp"
                     android:background="?android:attr/selectableItemBackground" />
 
-                <!-- Thay đổi mật khẩu -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -139,7 +131,6 @@
                     android:drawablePadding="10dp"
                     android:background="?android:attr/selectableItemBackground" />
 
-                <!-- Bật thông báo -->
                 <LinearLayout
                     android:id="@+id/tvNotificationSettings"
                     android:layout_width="match_parent"
@@ -158,7 +149,6 @@
                         android:id="@+id/switchNotification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:contentDescription="Bật thông báo"
                         tools:ignore="UseSwitchCompatOrMaterialXml" />
                 </LinearLayout>
@@ -167,10 +157,13 @@
                     android:id="@+id/btnCreateQr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Button" />
+                    android:text="Mã Qr của tôi"
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#62a6f1"
+                    android:textColor="#FFFFFF"
+                    android:padding="12dp"
+                    android:textAllCaps="false" />
             </LinearLayout>
-
-            <!-- Thông tin thêm -->
 
             <TextView
                 android:layout_width="match_parent"
@@ -189,7 +182,6 @@
                 android:background="#FFFFFF"
                 android:elevation="1dp">
 
-                <!-- Về chúng tôi -->
                 <TextView
                     android:id="@+id/tvAbout"
                     android:layout_width="match_parent"
@@ -200,7 +192,6 @@
                     android:drawablePadding="10dp"
                     android:background="?android:attr/selectableItemBackground" />
 
-                <!-- Chính sách bảo mật -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -209,13 +200,12 @@
                     android:drawableEnd="@drawable/icon_arrow"
                     android:drawablePadding="10dp"
                     android:background="?android:attr/selectableItemBackground" />
-
             </LinearLayout>
-        </LinearLayout>
 
+
+        </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom navigation -->
     <include
         android:id="@+id/bottomNavigation"
         layout="@layout/activity_bottom_base"

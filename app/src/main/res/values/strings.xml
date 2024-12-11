@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">E_Library</string>
+    <string name="filter_icon">Filter Icon</string>
+    <string name="unregister_button">Hủy đăng ký</string>
+    <string name="book_unregistered">Đã hủy đăng ký sách: %1$s</string>
+    <string name="failed_unregister">Không thể hủy đăng ký: %1$s</string>
+    <string name="failed_load_books">Không thể tải sách đã mượn: %1$s</string>
+    <string name="back_button">Quay lại</string>
 </resources>

@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F5F5F5"
-    android:gravity="top">
+    android:gravity="top"
+    >
 
     <!-- Top Bar -->
     <RelativeLayout
@@ -42,88 +43,100 @@
     </RelativeLayout>
 
     <!-- Email Text -->
-    <TextView
+    <EditText
         android:id="@+id/emailTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="Email Address"
         android:textSize="14sp"
         android:textColor="#333333"
-        android:layout_marginTop="20dp"
+        android:padding="12dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/rounded_background"
-        android:padding="12dp"
         android:elevation="2dp"
         android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        android:text="Email Address" />
+        android:layout_marginEnd="18dp" />
+
+    <!-- Full Name EditText -->
     <EditText
         android:id="@+id/fullNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Full Name"
+        android:textSize="14sp"
         android:padding="12dp"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_background" />
 
+    <!-- Phone Number EditText -->
     <EditText
         android:id="@+id/phoneNumberEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phone Number"
+        android:textSize="14sp"
         android:padding="12dp"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_background" />
 
+    <!-- ID Verification EditText -->
     <EditText
         android:id="@+id/idVerificationEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="ID Verification"
+        android:textSize="14sp"
         android:padding="12dp"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_background" />
 
+    <!-- Date of Birth TextView -->
     <TextView
         android:id="@+id/dateOfBirthTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Date of Birth"
+        android:textSize="14sp"
         android:padding="12dp"
         android:layout_margin="16dp"
         android:background="@drawable/rounded_background" />
 
-    <LinearLayout
+    <!-- Gender Selection with RadioGroup -->
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/maleCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Male" />
+            android:text="Male"
+            android:layout_marginEnd="16dp"/>
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/femaleCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Female" />
+            android:text="Female"
+            android:layout_marginEnd="16dp"/>
 
-        <CheckBox
+        <RadioButton
             android:id="@+id/otherCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Other" />
-    </LinearLayout>
+    </RadioGroup>
 
+    <!-- Update Button -->
     <Button
         android:id="@+id/updateBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:backgroundTint="#4A90E2"
         android:padding="14dp"
         android:text="Chỉnh sửa"

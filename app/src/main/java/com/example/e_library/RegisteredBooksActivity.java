@@ -2,6 +2,7 @@ package com.example.e_library;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,7 +27,11 @@ public class RegisteredBooksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registered_books);
-
+        // Hiển thị nút back trên ActionBar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(getString(R.string.back_button)); // Đặt tiêu đề là "Quay lại"
+        }
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -36,8 +41,13 @@ public class RegisteredBooksActivity extends AppCompatActivity {
         booksListView.setAdapter(adapter);
 
         Button unregisterButton = findViewById(R.id.unregisterButton);
+        unregisterButton.setText(getString(R.string.unregister_button)); // Đặt nút bằng tiếng Việt
         unregisterButton.setOnClickListener(v -> unregisterSelectedBooks());
 
+        // Nút Back
+
+        ImageView backIcon = findViewById(R.id.backIcon);
+        backIcon.setOnClickListener(view -> finish());
         fetchBorrowedBooks();
     }
 

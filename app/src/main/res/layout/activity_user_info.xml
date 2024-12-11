@@ -13,9 +13,7 @@
         android:layout_height="wrap_content"
         android:background="#4F91D7"
         android:padding="12dp"
-        android:elevation="4dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="16dp">
+        android:elevation="4dp">
 
         <!-- Back Icon -->
         <ImageView
@@ -62,14 +60,12 @@
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:textColor="#333333"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_background"
         android:padding="12dp"
-        android:elevation="2dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginEnd="18dp"
-        android:text="Email Address" />
+        android:hint="Email Address" />
 
     <!-- Username Text -->
     <TextView
@@ -78,58 +74,72 @@
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:textColor="#333333"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/rounded_background"
-        android:padding="12dp"
-        android:elevation="2dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Username" />
+        android:background="@drawable/rounded_background"
+        android:padding="12dp"
+        android:hint="Username" />
 
+    <!-- ID Verification Text -->
     <TextView
         android:id="@+id/idVerificationTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="ID Verification"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_background"
         android:padding="12dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/rounded_background" />
+        android:hint="ID Verification" />
 
+    <!-- Full Name Text -->
     <TextView
         android:id="@+id/fullNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Full Name"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_background"
         android:padding="12dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/rounded_background" />
+        android:hint="Full Name" />
 
+    <!-- Gender Text -->
     <TextView
         android:id="@+id/genderTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Gender"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_background"
         android:padding="12dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/rounded_background" />
+        android:hint="Gender" />
+
+    <!-- Phone Number Text -->
     <TextView
         android:id="@+id/phoneNumberTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Phone Number"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_background"
         android:padding="12dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/rounded_background" />
+        android:hint="Phone Number" />
 
-
+    <!-- Date of Birth Text -->
     <TextView
         android:id="@+id/dobTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Date of Birth"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_background"
         android:padding="12dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/rounded_background" />
+        android:hint="Date of Birth" />
 
     <!-- Logout Button -->
     <Button
@@ -137,13 +147,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:backgroundTint="#4A90E2"
         android:padding="14dp"
         android:text="Đăng xuất"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true" />
+        android:textStyle="bold" />
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package com.example.e_library;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,6 +35,10 @@ public class BookReturnActivity extends AppCompatActivity {
         adapter = new BookReturnAdapter(this, returnBook);
         booksListView.setAdapter(adapter);
 
+        ImageView backIcon = findViewById(R.id.backIcon);
+        backIcon.setOnClickListener(view -> finish());
+        // Thiết lập tab
+        TabUtils.setupTabs(this);
 
         fetchReturnBooks();
     }
@@ -53,7 +58,7 @@ public class BookReturnActivity extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(this, "Failed to load borrowing books: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Không tải được sách mượn: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
     }
 

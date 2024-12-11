@@ -9,12 +9,11 @@
     <!-- Top Bar -->
     <RelativeLayout
         android:id="@+id/topBar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#4F91D7"
         android:padding="12dp"
         android:elevation="4dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -30,7 +29,6 @@
             android:contentDescription="Back Icon"
             android:padding="4dp"
             android:src="@drawable/icon_back_white" />
-
         <!-- Title -->
         <TextView
             android:id="@+id/titleText"
@@ -45,14 +43,14 @@
 
     <!-- ListView Container -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/rounded_background"
         android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/topBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation">
 
         <!-- ListView -->
         <ListView
@@ -67,7 +65,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Include bottom navigation -->
+    <include
+        android:id="@+id/bottomNavigation"
+        layout="@layout/activity_bottom_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

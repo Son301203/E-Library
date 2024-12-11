@@ -29,8 +29,7 @@ public class HomeActivity extends AppCompatActivity {
         LinearLayout borrowingBooksLayout = findViewById(R.id.borrowingBooks);
         LinearLayout returnBookLayout = findViewById(R.id.returnBook);
 
-
-        // Add the correct ID
+        // Thêm ID chính xác
         registeredBooksLayout.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, RegisteredBooksActivity.class);
             startActivity(intent);
@@ -46,8 +45,6 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
-
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         borrowedBooksCount = findViewById(R.id.borrowedBooksCount);
@@ -59,20 +56,18 @@ public class HomeActivity extends AppCompatActivity {
             swipeRefreshLayout.setRefreshing(false);
         });
 
-
-
         ImageView accountIcon = findViewById(R.id.accountIcon);
         accountIcon.setOnClickListener(v -> {
             if (auth.getCurrentUser() != null) {
                 Intent intent = new Intent(HomeActivity.this, UserInfoActivity.class);
                 startActivity(intent);
             } else {
-                Toast.makeText(HomeActivity.this, "You need to log in first!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "Bạn cần đăng nhập trước!", Toast.LENGTH_SHORT).show();
             }
         });
         // Thiết lập tab
         TabUtils.setupTabs(this);
-        // Fetch and display borrowed books count
+        // Lấy và hiển thị số lượng sách đã mượn
         fetchBorrowedBooksCount();
         fetchBorrowingBooksCount();
     }
@@ -81,32 +76,32 @@ public class HomeActivity extends AppCompatActivity {
 
         String userId = auth.getCurrentUser().getUid();
 
-        // Access the "borrowed_books" collection for the current user
+        // Truy cập vào bộ sưu tập "borrowed_books" của người dùng hiện tại
         db.collection("users").document(userId)
                 .collection("borrowed_books")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     int count = queryDocumentSnapshots.size();
-                    borrowedBooksCount.setText(String.valueOf(count)); // Update the TextView
+                    borrowedBooksCount.setText(String.valueOf(count)); // Cập nhật TextView
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(this, "Failed to fetch borrowed books count: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Lỗi khi lấy số lượng sách đã mượn: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
     }
 
     private void fetchBorrowingBooksCount() {
         String userId = auth.getCurrentUser().getUid();
 
-        // Access the "borrowed_books" collection for the current user
+        // Truy cập vào bộ sưu tập "borrowing_books" của người dùng hiện tại
         db.collection("users").document(userId)
                 .collection("borrowing_books")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     int count = queryDocumentSnapshots.size();
-                    borrowingBooksCount.setText(String.valueOf(count)); // Update the TextView
+                    borrowingBooksCount.setText(String.valueOf(count)); // Cập nhật TextView
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(this, "Failed to fetch borrowed books count: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Lỗi khi lấy số lượng sách đang mượn: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
     }
 }

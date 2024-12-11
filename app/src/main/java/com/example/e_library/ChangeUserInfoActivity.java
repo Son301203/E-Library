@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class ChangeUserInfoActivity extends AppCompatActivity {
 
     private TextView emailTextView, dateOfBirthTextView;
     private EditText fullNameEditText, phoneNumberEditText, idVerificationEditText;
-    private CheckBox maleCheckBox, femaleCheckBox, otherCheckBox;
+    private RadioButton maleCheckBox, femaleCheckBox, otherCheckBox;
     private Button updateButton;
 
     @Override
@@ -91,10 +92,10 @@ public class ChangeUserInfoActivity extends AppCompatActivity {
                             otherCheckBox.setChecked(true);
                         }
                     } else {
-                        Toast.makeText(this, "User data not found!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Không tìm thấy dữ liệu người dùng!", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(e -> Toast.makeText(this, "Error fetching user info: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(this, "Lỗi tìm nạp thông tin người dùng: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
     private void showDatePicker() {
@@ -134,11 +135,11 @@ public class ChangeUserInfoActivity extends AppCompatActivity {
                 .update(updates)
                 .addOnSuccessListener(
                         unused -> {
-                            Toast.makeText(this, "User info updated successfully!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Thông tin người dùng được cập nhật thành công!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(ChangeUserInfoActivity.this, SettingActivity.class);
                             startActivity(intent);
                             finish();
                         })
-                .addOnFailureListener(e -> Toast.makeText(this, "Error updating user info: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(this, "Lỗi cập nhật thông tin người dùng: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 }

@@ -23,6 +23,9 @@ public class GeneratorFragment extends AppCompatActivity {
         qrCodeImage = findViewById(R.id.qr_code_image);
         auth = FirebaseAuth.getInstance();
         generatorQ();
+        ImageView backIcon = findViewById(R.id.backIcon);
+        // Nút Back
+        backIcon.setOnClickListener(view -> finish());
     }
 
     private void generatorQ() {

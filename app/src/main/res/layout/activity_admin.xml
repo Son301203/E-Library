@@ -1,61 +1,118 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
+    android:layout_height="match_parent">
 
+    <!-- Thanh đầu trang (Top Bar) -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="#4F91D7"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/topBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ứng dụng Quét QR"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium" />
+    </LinearLayout>
+
+    <!-- Nút Quét QR -->
 
     <Button
         android:id="@+id/scanner"
-        android:layout_width="270dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp"
-        android:text="QR SCANNER" />
+        android:text="Quét QR"
+        android:layout_marginTop="96dp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#4F91D7"
+        android:paddingVertical="12dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginRight="130dp"
+        android:elevation="2dp" />
 
+    <!-- Hiển thị kết quả QR -->
     <TextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/scanner"
-        android:layout_marginTop="10dp"
-        android:textSize="18sp"
-        android:text="Scanned QR result will display here" />
+        android:layout_marginTop="16dp"
+        android:textSize="16sp"
+        android:text="Kết quả QR quét sẽ hiển thị tại đây"
+        android:textColor="#333333"
+        android:padding="16dp" />
 
+    <!-- Hiển thị email người dùng -->
     <TextView
         android:id="@+id/userEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/text"
-        android:layout_marginTop="10dp"
-        android:textSize="18sp"
-        android:text="User Email will display here" />
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:text="Email người dùng sẽ hiển thị tại đây"
+        android:textColor="#333333"
+        android:padding="16dp" />
 
+    <!-- Nút Mượn sách đã chọn -->
     <Button
         android:id="@+id/lendButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/borrowedBooksList"
-        android:text="Lend Selected Books" />
+        android:layout_below="@id/userEmail"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#4F91D7"
+        android:text="Mượn sách đã chọn"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:textColor="@android:color/white" />
 
+    <!-- Nút Chuyển sang sách mượn -->
     <Button
         android:id="@+id/toggleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/lendButton"
-        android:text="Toggle to Borrowing Books" />
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#4F91D7"
+        android:text="Chuyển sang sách mượn"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:textColor="@android:color/white" />
 
+    <!-- Nút Trả sách -->
     <Button
         android:id="@+id/returnButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toggleView"
-        android:text="Tra sach" />
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#4F91D7"
+        android:text="Trả sách"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:textColor="@android:color/white" />
 
+    <!-- Danh sách sách đã mượn -->
     <ListView
         android:id="@+id/borrowedBooksList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/userEmail"
-        android:layout_marginTop="10dp" />
-
+        android:layout_below="@id/returnButton"
+        android:layout_marginTop="8dp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
 </RelativeLayout>

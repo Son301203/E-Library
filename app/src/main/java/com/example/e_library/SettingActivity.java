@@ -44,7 +44,7 @@ public class SettingActivity extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        String username = documentSnapshot.getString("user_name");
+                        String username = documentSnapshot.getString("fullname");
                         profileUsername.setText(username);
                     }
                 })
@@ -57,11 +57,7 @@ public class SettingActivity extends AppCompatActivity {
      */
     private void setupListeners() {
 
-        // Nhấn vào "Account Settings"
-        ImageView tvAccountSettings = findViewById(R.id.tvAccountSettings);
-        tvAccountSettings.setOnClickListener(v ->
-                Toast.makeText(this, "Account Settings clicked", Toast.LENGTH_SHORT).show()
-        );
+
 
         // Tìm Switch thông báo và xử lý sự kiện bật/tắt
         Switch switchNotification = findViewById(R.id.switchNotification);

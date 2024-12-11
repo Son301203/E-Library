@@ -25,6 +25,8 @@ public class BookListActivity extends AppCompatActivity {
     private List<Book> bookList = new ArrayList<>();
     private List<Book> filteredList = new ArrayList<>();
 
+    private boolean isAscending = true; // Biến kiểm tra hướng sắp xếp (true = A đến Z, false = Z đến A)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class BookListActivity extends AppCompatActivity {
         ImageView searchIcon = findViewById(R.id.searchIcon);
         TextView titleText = findViewById(R.id.titleText);
         ConstraintLayout parentLayout = findViewById(R.id.parentLayout);
+        ImageView filterIcon = findViewById(R.id.filterIcon);  // Lọc icon
 
         // Nút Back
         backIcon.setOnClickListener(view -> finish());
@@ -86,6 +89,12 @@ public class BookListActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        // Set up filter functionality
+        filterIcon.setOnClickListener(v -> {
+            toggleSortOrder(); // Lọc theo thứ tự A-Z hoặc Z-A
+            sortBooks(); // Sắp xếp sách
+        });
         // Thiết lập tab
         TabUtils.setupTabs(this);
     }
@@ -101,6 +110,7 @@ public class BookListActivity extends AppCompatActivity {
                         bookList.add(book);
                     }
 
+                    // Sắp xếp danh sách sách theo tên
                     Collections.sort(bookList, new Comparator<Book>() {
                         @Override
                         public int compare(Book book1, Book book2) {
@@ -108,14 +118,56 @@ public class BookListActivity extends AppCompatActivity {
                         }
                     });
 
-                    // Initially show all books
+                    // Hiển thị tất cả sách ban đầu
                     filteredList.clear();
                     filteredList.addAll(bookList);
                     bookAdapter.notifyDataSetChanged();
+
+                    // Cập nhật số lượng sách
+                    updateBookCount(); // Gọi hàm cập nhật số lượng sách
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(this, "Error fetching data: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                        Toast.makeText(this, "Lỗi tìm nạp dữ liệu: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
+
+    private void toggleSortOrder() {
+        // Chuyển đổi giữa A-Z và Z-A
+        isAscending = !isAscending;
+    }
+
+    private void sortBooks() {
+        // Sắp xếp danh sách sách theo tên (A-Z hoặc Z-A)
+        if (isAscending) {
+            Collections.sort(bookList, new Comparator<Book>() {
+                @Override
+                public int compare(Book book1, Book book2) {
+                    return book1.getTitle().compareToIgnoreCase(book2.getTitle());
+                }
+            });
+        } else {
+            Collections.sort(bookList, new Comparator<Book>() {
+                @Override
+                public int compare(Book book1, Book book2) {
+                    return book2.getTitle().compareToIgnoreCase(book1.getTitle());
+                }
+            });
+        }
+
+        // Cập nhật danh sách đã lọc
+        filteredList.clear();
+        filteredList.addAll(bookList);
+        bookAdapter.notifyDataSetChanged();
+    }
+
+
+
+    private void updateBookCount() {
+        TextView productCountTextView = findViewById(R.id.productCount); // Lấy TextView theo ID
+        int bookCount = filteredList.size(); // Đếm số lượng sách trong danh sách đã lọc
+        String countText = bookCount + " sản phẩm"; // Tạo chuỗi hiển thị số lượng sách
+        productCountTextView.setText(countText); // Cập nhật vào TextView
+    }
+
 
     private void filterBooks(String query) {
         filteredList.clear();

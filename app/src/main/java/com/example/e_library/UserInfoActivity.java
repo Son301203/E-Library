@@ -40,6 +40,7 @@ public class UserInfoActivity extends AppCompatActivity {
         idVerificationTextView = findViewById(R.id.idVerificationTextView);
         // Nút Back
         backIcon.setOnClickListener(view -> finish());
+
         // Fetch and display user information
         fetchUserInfo();
 
@@ -76,9 +77,9 @@ public class UserInfoActivity extends AppCompatActivity {
                         idVerificationTextView.setText(idVerification);
                         genderTextView.setText(gender);
                     } else {
-                        Toast.makeText(this, "User data not found!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Không tìm thấy dữ liệu người dùng!", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(e -> Toast.makeText(this, "Error fetching user info: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(this, "Lỗi tìm nạp thông tin người dùng: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 }
