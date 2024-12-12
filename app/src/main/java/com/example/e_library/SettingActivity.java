@@ -21,6 +21,8 @@ public class SettingActivity extends AppCompatActivity {
     private FirebaseFirestore db;
 
     private TextView profileUsername;
+    private ImageView logoutButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +35,18 @@ public class SettingActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         profileUsername = findViewById(R.id.profileUsername);
+        logoutButton = findViewById((R.id.logoutBtn));
 
         fetchUserInfo();
+
+        logoutButton.setOnClickListener(v -> {
+            auth.signOut();
+            Toast.makeText(SettingActivity.this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SettingActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void fetchUserInfo() {
@@ -56,8 +68,6 @@ public class SettingActivity extends AppCompatActivity {
      * Hàm thiết lập sự kiện click và các lắng nghe khác
      */
     private void setupListeners() {
-
-
 
         // Tìm Switch thông báo và xử lý sự kiện bật/tắt
         Switch switchNotification = findViewById(R.id.switchNotification);

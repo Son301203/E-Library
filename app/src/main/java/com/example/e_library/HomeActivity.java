@@ -53,6 +53,7 @@ public class HomeActivity extends AppCompatActivity {
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
             fetchBorrowedBooksCount();
+            fetchBorrowingBooksCount();
             swipeRefreshLayout.setRefreshing(false);
         });
 

@@ -47,6 +47,7 @@ public class UserInfoActivity extends AppCompatActivity {
         // Logout functionality
         logoutButton.setOnClickListener(v -> {
             auth.signOut();
+            Toast.makeText(UserInfoActivity.this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(UserInfoActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

@@ -51,7 +51,7 @@ public class SignUpActivity extends AppCompatActivity {
         String username = userInput.getText().toString();
 
         if (email.isEmpty() || password.isEmpty() || username.isEmpty()) {
-            Toast.makeText(this, "Email, Password and Username are required!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Các trường không được để trống", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -62,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
                         saveUserToFirestore(userId, email, password, username);
                         finish();
                     } else {
-                        Toast.makeText(this, "Sign Up Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Đăng ký thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -80,7 +80,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         db.collection("users").document(userId)
                 .set(user)
-                .addOnSuccessListener(aVoid -> Toast.makeText(this, "User Registered Successfully!", Toast.LENGTH_SHORT).show())
+                .addOnSuccessListener(aVoid -> Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> Toast.makeText(this, "Failed to Save User: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 }
