@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,11 +29,40 @@ public class MainActivity extends AppCompatActivity {
 
         Button loginButton = findViewById(R.id.loginButton);
         Button goToSignUpButton = findViewById(R.id.goToSignUpButton);
+        TextView forgotPasswordText = findViewById(R.id.forgotPasswordText);
 
         loginButton.setOnClickListener(v -> loginUser());
         goToSignUpButton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
             startActivity(intent);
+        });
+        forgotPasswordText.setOnClickListener(v -> {
+            String email = emailInput.getText().toString();
+
+            if (email.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Vui lòng nhập email của bạn!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            auth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, "Đã gửi email đặt lại mật khẩu!", Toast.LENGTH_SHORT).show();
+
+                            // Optionally, update Firestore with a placeholder or mark password as reset
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            db.collection("users").whereEqualTo("email", email).get()
+                                    .addOnSuccessListener(querySnapshot -> {
+                                        if (!querySnapshot.isEmpty()) {
+                                            querySnapshot.getDocuments().get(0).getReference()
+                                                    .update("password", "RESET");
+                                        }
+                                    })
+                                    .addOnFailureListener(e -> Toast.makeText(MainActivity.this, "Error fetching user document: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                        } else {
+                            Toast.makeText(MainActivity.this, "Lỗi: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
         // Thiết lập tab
         TabUtils.setupTabs(this);
@@ -63,4 +94,5 @@ public class MainActivity extends AppCompatActivity {
                     });
         }
     }
+
 }
