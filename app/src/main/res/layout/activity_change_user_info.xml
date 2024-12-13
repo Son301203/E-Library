@@ -112,21 +112,21 @@
             android:id="@+id/maleCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Male"
+            android:text="Nam"
             android:layout_marginEnd="16dp"/>
 
         <RadioButton
             android:id="@+id/femaleCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Female"
+            android:text="Nữ"
             android:layout_marginEnd="16dp"/>
 
         <RadioButton
             android:id="@+id/otherCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Other" />
+            android:text="Khác" />
     </RadioGroup>
 
     <!-- Update Button -->

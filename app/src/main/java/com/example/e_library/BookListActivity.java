@@ -1,5 +1,6 @@
 package com.example.e_library;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,6 +28,7 @@ public class BookListActivity extends AppCompatActivity {
 
     private boolean isAscending = true; // Biến kiểm tra hướng sắp xếp (true = A đến Z, false = Z đến A)
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,7 +160,6 @@ public class BookListActivity extends AppCompatActivity {
         filteredList.addAll(bookList);
         bookAdapter.notifyDataSetChanged();
     }
-
 
 
     private void updateBookCount() {

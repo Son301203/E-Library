@@ -35,8 +35,8 @@ public class UserInfoActivity extends AppCompatActivity {
         logoutButton = findViewById(R.id.logoutButton);
         fullNameTextView = findViewById(R.id.fullNameTextView);
         genderTextView = findViewById(R.id.genderTextView);
-        phoneNumberTextView= findViewById(R.id.phoneNumberTextView);
-        dateOfBirthTextView= findViewById(R.id.dobTextView);
+        phoneNumberTextView = findViewById(R.id.phoneNumberTextView);
+        dateOfBirthTextView = findViewById(R.id.dobTextView);
         idVerificationTextView = findViewById(R.id.idVerificationTextView);
         // Nút Back
         backIcon.setOnClickListener(view -> finish());

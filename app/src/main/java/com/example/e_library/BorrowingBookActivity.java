@@ -14,13 +14,14 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class BorrowingBookActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private ListView booksListView;
     private BorrowingBookAdapter adapter;
-    private List<BorrowedBook> borrowingBooks;
+    private List<Book> borrowingBooks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class BorrowingBookActivity extends AppCompatActivity {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     borrowingBooks.clear();
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        BorrowedBook book = document.toObject(BorrowedBook.class);
+                        Book book = document.toObject(Book.class);
 //                        book.setId(document.getId()); // Gán ID của tài liệu từ Firestore
                         borrowingBooks.add(book);
                     }

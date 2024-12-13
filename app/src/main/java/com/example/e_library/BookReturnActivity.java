@@ -16,7 +16,7 @@ public class BookReturnActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private ListView booksListView;
     private BookReturnAdapter adapter;
-    private List<BorrowedBook> returnBook;
+    private List<Book> returnBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +49,10 @@ public class BookReturnActivity extends AppCompatActivity {
 
                     // Map để đếm số lượng sách trùng
                     Map<String, Integer> bookCountMap = new HashMap<>();
-                    Map<String, BorrowedBook> uniqueBooksMap = new HashMap<>();
+                    Map<String, Book> uniqueBooksMap = new HashMap<>();
 
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        BorrowedBook book = document.toObject(BorrowedBook.class);
+                        Book book = document.toObject(Book.class);
 
                         // Tạo key duy nhất dựa trên title, author và publisher
                         String key = book.getTitle() + "|" + book.getAuthor() + "|" + book.getPublisher();
@@ -68,7 +68,7 @@ public class BookReturnActivity extends AppCompatActivity {
 
                     // Thêm sách vào danh sách hiển thị
                     for (String key : uniqueBooksMap.keySet()) {
-                        BorrowedBook book = uniqueBooksMap.get(key);
+                        Book book = uniqueBooksMap.get(key);
                         book.setCount(bookCountMap.get(key)); // Gán số lượng
                         returnBook.add(book);
                     }
@@ -79,7 +79,6 @@ public class BookReturnActivity extends AppCompatActivity {
                         Toast.makeText(this, "Không tải được sách mượn: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
     }
-
 
 
 }

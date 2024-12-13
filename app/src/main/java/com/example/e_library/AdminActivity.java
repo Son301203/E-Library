@@ -29,7 +29,7 @@ public class AdminActivity extends AppCompatActivity {
     private ListView borrowedBooksListView;
     private FirebaseFirestore db;
     private BorrowedBooksAdapter borrowedBooksAdapter;
-    private List<BorrowedBook> borrowedBooksList;
+    private List<Book> borrowedBooksList;
     private Button returnBtn;
     private Button lendBtn;
     private Button scanBtn;
@@ -74,7 +74,7 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void lendSelectedBooks() {
-        List<BorrowedBook> selectedBooks = borrowedBooksAdapter.getSelectedBooks();
+        List<Book> selectedBooks = borrowedBooksAdapter.getSelectedBooks();
 
         if (selectedBooks.isEmpty()) {
             Toast.makeText(this, "Vui lòng chọn sách để mượn", Toast.LENGTH_SHORT).show();
@@ -84,7 +84,7 @@ public class AdminActivity extends AppCompatActivity {
         String userId = qrResultText.getText().toString();
         AtomicInteger successCount = new AtomicInteger();
 
-        for (BorrowedBook book : selectedBooks) {
+        for (Book book : selectedBooks) {
             db.collection("users").document(userId).collection("borrowed_books")
                     .document(book.getId()).delete()
                     .addOnSuccessListener(avoid -> {
@@ -108,7 +108,7 @@ public class AdminActivity extends AppCompatActivity {
     }
 
     private void returnSelectedBooks() {
-        List<BorrowedBook> selectedBooks = borrowedBooksAdapter.getSelectedBooks();
+        List<Book> selectedBooks = borrowedBooksAdapter.getSelectedBooks();
 
         if (selectedBooks.isEmpty()) {
             Toast.makeText(this, "Vui lòng chọn sách để trả", Toast.LENGTH_SHORT).show();
@@ -118,7 +118,7 @@ public class AdminActivity extends AppCompatActivity {
         String userId = qrResultText.getText().toString();
         AtomicInteger successCount = new AtomicInteger();
 
-        for (BorrowedBook book : selectedBooks) {
+        for (Book book : selectedBooks) {
             db.collection("users").document(userId).collection("borrowing_books")
                     .document(book.getId()).delete()
                     .addOnSuccessListener(avoid -> {
@@ -165,7 +165,7 @@ public class AdminActivity extends AppCompatActivity {
                 .addOnSuccessListener(querySnapshot -> {
                     borrowedBooksList.clear();
                     for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
-                        BorrowedBook book = doc.toObject(BorrowedBook.class);
+                        Book book = doc.toObject(Book.class);
                         borrowedBooksList.add(book);
                     }
                     borrowedBooksAdapter.notifyDataSetChanged();
@@ -222,7 +222,7 @@ public class AdminActivity extends AppCompatActivity {
                 .addOnSuccessListener(querySnapshot -> {
                     borrowedBooksList.clear();
                     for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
-                        BorrowedBook book = doc.toObject(BorrowedBook.class);
+                        Book book = doc.toObject(Book.class);
                         if (book != null) {
                             book.setId(doc.getId()); // Gán ID của tài liệu từ Firestore
                             borrowedBooksList.add(book);

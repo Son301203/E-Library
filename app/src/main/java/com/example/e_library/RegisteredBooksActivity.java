@@ -21,7 +21,7 @@ public class RegisteredBooksActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private ListView booksListView;
     private BorrowedBooksAdapter adapter;
-    private List<BorrowedBook> borrowedBooks;
+    private List<Book> borrowedBooks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +52,10 @@ public class RegisteredBooksActivity extends AppCompatActivity {
     }
 
     private void unregisterSelectedBooks() {
-        List<BorrowedBook> selectedBooks = adapter.getSelectedBooks();
+        List<Book> selectedBooks = adapter.getSelectedBooks();
         String userId = auth.getCurrentUser().getUid();
 
-        for (BorrowedBook book : selectedBooks) {
+        for (Book book : selectedBooks) {
             db.collection("users")
                     .document(userId)
                     .collection("borrowed_books")
@@ -79,7 +79,7 @@ public class RegisteredBooksActivity extends AppCompatActivity {
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     borrowedBooks.clear();
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        BorrowedBook book = document.toObject(BorrowedBook.class);
+                        Book book = document.toObject(Book.class);
                         book.setId(document.getId()); // Gán ID của tài liệu từ Firestore
                         borrowedBooks.add(book);
                     }

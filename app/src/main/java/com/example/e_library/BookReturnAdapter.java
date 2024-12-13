@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BookReturnAdapter extends android.widget.ArrayAdapter<BorrowedBook> {
+public class BookReturnAdapter extends android.widget.ArrayAdapter<Book> {
 
     private final Context context;
-    private final List<BorrowedBook> bookReturn;
+    private final List<Book> bookReturn;
 
-    public BookReturnAdapter(Context context, List<BorrowedBook> bookReturn) {
+    public BookReturnAdapter(Context context, List<Book> bookReturn) {
         super(context, 0, bookReturn);
         this.context = context;
         this.bookReturn = bookReturn;
@@ -43,7 +43,7 @@ public class BookReturnAdapter extends android.widget.ArrayAdapter<BorrowedBook>
         TextView bookCount = convertView.findViewById(R.id.bookCount); // Thêm TextView hiển thị số lượng
 
         // Get the current book
-        BorrowedBook book = bookReturn.get(position);
+        Book book = bookReturn.get(position);
 
         // Set data
         bookTitle.setText(book.getTitle());

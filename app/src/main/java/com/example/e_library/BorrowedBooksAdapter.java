@@ -19,13 +19,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BorrowedBooksAdapter extends android.widget.ArrayAdapter<BorrowedBook> {
+public class BorrowedBooksAdapter extends android.widget.ArrayAdapter<Book> {
 
     private final Context context;
-    private final List<BorrowedBook> borrowedBooks;
+    private final List<Book> borrowedBooks;
     private final SparseBooleanArray selectedBooks;
 
-    public BorrowedBooksAdapter(Context context, List<BorrowedBook> borrowedBooks) {
+    public BorrowedBooksAdapter(Context context, List<Book> borrowedBooks) {
         super(context, 0, borrowedBooks);
         this.context = context;
         this.borrowedBooks = borrowedBooks;
@@ -47,7 +47,7 @@ public class BorrowedBooksAdapter extends android.widget.ArrayAdapter<BorrowedBo
         TextView borrowedAt = convertView.findViewById(R.id.borrowedAt);
 
         // Get the current book
-        BorrowedBook book = borrowedBooks.get(position);
+        Book book = borrowedBooks.get(position);
 
         // Set data
         bookTitle.setText(book.getTitle());
@@ -65,8 +65,8 @@ public class BorrowedBooksAdapter extends android.widget.ArrayAdapter<BorrowedBo
         return convertView;
     }
 
-    public List<BorrowedBook> getSelectedBooks() {
-        List<BorrowedBook> selected = new ArrayList<>();
+    public List<Book> getSelectedBooks() {
+        List<Book> selected = new ArrayList<>();
         for (int i = 0; i < borrowedBooks.size(); i++) {
             if (selectedBooks.get(i, false)) {
                 selected.add(borrowedBooks.get(i));

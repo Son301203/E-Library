@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class GeneratorFragment extends AppCompatActivity {
     private FirebaseAuth auth;
     private ImageView qrCodeImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,13 +32,14 @@ public class GeneratorFragment extends AppCompatActivity {
     private void generatorQ() {
         String userlId = auth.getCurrentUser().getUid();
         if (!userlId.isEmpty()) {
-                try {
-                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-                    Bitmap bitmap = barcodeEncoder.encodeBitmap(userlId, BarcodeFormat.QR_CODE, 300, 300);
-                    qrCodeImage.setImageBitmap(bitmap);
-                } catch (WriterException e) {
-                    e.printStackTrace();
-                }
-            };
+            try {
+                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                Bitmap bitmap = barcodeEncoder.encodeBitmap(userlId, BarcodeFormat.QR_CODE, 300, 300);
+                qrCodeImage.setImageBitmap(bitmap);
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
+        }
+        ;
     }
 }

@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BorrowingBookAdapter extends android.widget.ArrayAdapter<BorrowedBook> {
+public class BorrowingBookAdapter extends android.widget.ArrayAdapter<Book> {
 
     private final Context context;
-    private final List<BorrowedBook> borrowingBooks;
+    private final List<Book> borrowingBooks;
 
-    public BorrowingBookAdapter(Context context, List<BorrowedBook> borrowingBooks) {
+    public BorrowingBookAdapter(Context context, List<Book> borrowingBooks) {
         super(context, 0, borrowingBooks);
         this.context = context;
         this.borrowingBooks = borrowingBooks;
@@ -42,7 +42,7 @@ public class BorrowingBookAdapter extends android.widget.ArrayAdapter<BorrowedBo
         TextView bookAuthor = convertView.findViewById(R.id.bookAuthor);
 
         // Get the current book
-        BorrowedBook book = borrowingBooks.get(position);
+        Book book = borrowingBooks.get(position);
 
         // Set data
         bookTitle.setText(book.getTitle());

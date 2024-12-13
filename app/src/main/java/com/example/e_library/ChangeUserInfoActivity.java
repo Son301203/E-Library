@@ -84,11 +84,11 @@ public class ChangeUserInfoActivity extends AppCompatActivity {
                         dateOfBirthTextView.setText(dateOfBirth);
                         idVerificationEditText.setText(idVerification);
 
-                        if ("Male".equalsIgnoreCase(gender)) {
+                        if ("Nam".equalsIgnoreCase(gender)) {
                             maleCheckBox.setChecked(true);
-                        } else if ("Female".equalsIgnoreCase(gender)) {
+                        } else if ("Nữ".equalsIgnoreCase(gender)) {
                             femaleCheckBox.setChecked(true);
-                        } else if ("Other".equalsIgnoreCase(gender)) {
+                        } else if ("Khác".equalsIgnoreCase(gender)) {
                             otherCheckBox.setChecked(true);
                         }
                     } else {
@@ -120,9 +120,9 @@ public class ChangeUserInfoActivity extends AppCompatActivity {
         String dateOfBirth = dateOfBirthTextView.getText().toString();
         String gender = "";
 
-        if (maleCheckBox.isChecked()) gender = "Male";
-        if (femaleCheckBox.isChecked()) gender = "Female";
-        if (otherCheckBox.isChecked()) gender = "Other";
+        if (maleCheckBox.isChecked()) gender = "Nam";
+        if (femaleCheckBox.isChecked()) gender = "Nữ";
+        if (otherCheckBox.isChecked()) gender = "Khác";
 
         Map<String, Object> updates = new HashMap<>();
         updates.put("fullname", fullName);

@@ -77,12 +77,10 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        if(email.equals("admin@gmail.com")) {
+        if (email.equals("admin@gmail.com")) {
             startActivity(new Intent(MainActivity.this, AdminActivity.class));
             finish();
-        }
-
-        else {
+        } else {
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
