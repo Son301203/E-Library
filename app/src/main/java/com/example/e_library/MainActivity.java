@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, AdminActivity.class));
             finish();
         }
+
         else {
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {

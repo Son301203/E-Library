@@ -74,4 +74,10 @@ public class BorrowedBooksAdapter extends android.widget.ArrayAdapter<BorrowedBo
         }
         return selected;
     }
+
+    public void clearSelection() {
+        selectedBooks.clear(); // Xóa tất cả các trạng thái checkbox được chọn
+        notifyDataSetChanged(); // Cập nhật giao diện
+    }
+
 }

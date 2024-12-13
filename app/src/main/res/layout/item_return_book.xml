@@ -34,4 +34,15 @@
             android:text="Author"
             android:layout_marginBottom="5dp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/bookCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="x2"
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_red_dark"
+        android:layout_marginEnd="10dp"
+        android:visibility="gone" />
 </LinearLayout>

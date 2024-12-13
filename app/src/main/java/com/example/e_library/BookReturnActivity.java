@@ -1,19 +1,15 @@
 package com.example.e_library;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.*;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.auth.*;
+import com.google.firebase.firestore.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 public class BookReturnActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
@@ -50,17 +46,40 @@ public class BookReturnActivity extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     returnBook.clear();
+
+                    // Map để đếm số lượng sách trùng
+                    Map<String, Integer> bookCountMap = new HashMap<>();
+                    Map<String, BorrowedBook> uniqueBooksMap = new HashMap<>();
+
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         BorrowedBook book = document.toObject(BorrowedBook.class);
-//                        book.setId(document.getId()); // Gán ID của tài liệu từ Firestore
+
+                        // Tạo key duy nhất dựa trên title, author và publisher
+                        String key = book.getTitle() + "|" + book.getAuthor() + "|" + book.getPublisher();
+
+                        // Đếm số lượng sách
+                        bookCountMap.put(key, bookCountMap.getOrDefault(key, 0) + 1);
+
+                        // Chỉ lưu thông tin sách một lần
+                        if (!uniqueBooksMap.containsKey(key)) {
+                            uniqueBooksMap.put(key, book);
+                        }
+                    }
+
+                    // Thêm sách vào danh sách hiển thị
+                    for (String key : uniqueBooksMap.keySet()) {
+                        BorrowedBook book = uniqueBooksMap.get(key);
+                        book.setCount(bookCountMap.get(key)); // Gán số lượng
                         returnBook.add(book);
                     }
+
                     adapter.notifyDataSetChanged();
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(this, "Không tải được sách mượn: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
     }
+
 
 
 }

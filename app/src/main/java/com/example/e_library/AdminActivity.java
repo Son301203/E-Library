@@ -2,6 +2,7 @@ package com.example.e_library;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,16 +30,21 @@ public class AdminActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private BorrowedBooksAdapter borrowedBooksAdapter;
     private List<BorrowedBook> borrowedBooksList;
+    private Button returnBtn;
+    private Button lendBtn;
+    private Button scanBtn;
+    private Button toggleViewBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        Button scanBtn = findViewById(R.id.scanner);
-        Button lendBtn = findViewById(R.id.lendButton);
-        Button returnBtn = findViewById(R.id.returnButton);
-        Button toggleViewBtn = findViewById(R.id.toggleView);
+        scanBtn = findViewById(R.id.scanner);
+        lendBtn = findViewById(R.id.lendButton);
+        returnBtn = findViewById(R.id.returnButton);
+
+        toggleViewBtn = findViewById(R.id.toggleView);
         qrResultText = findViewById(R.id.text);
         userEmailText = findViewById(R.id.userEmail);
         borrowedBooksListView = findViewById(R.id.borrowedBooksList);
@@ -56,6 +62,10 @@ public class AdminActivity extends AppCompatActivity {
             intentIntegrator.initiateScan();
         });
 
+        returnBtn.setVisibility(View.GONE);
+        lendBtn.setVisibility(View.GONE);
+        toggleViewBtn.setVisibility(View.GONE);
+
         lendBtn.setOnClickListener(v -> lendSelectedBooks());
 
         returnBtn.setOnClickListener(v -> returnSelectedBooks());
@@ -71,7 +81,7 @@ public class AdminActivity extends AppCompatActivity {
             return;
         }
 
-        String userId = qrResultText.getText().toString().replace("Scanned ID: ", "");
+        String userId = qrResultText.getText().toString();
         AtomicInteger successCount = new AtomicInteger();
 
         for (BorrowedBook book : selectedBooks) {
@@ -81,22 +91,18 @@ public class AdminActivity extends AppCompatActivity {
                         db.collection("users").document(userId).collection("borrowing_books")
                                 .document(book.getId()).set(book)
                                 .addOnSuccessListener(avoid2 -> {
-                                    // Increment success count and show toast if all books processed
-                                    // Note: This is a simplified approach and might need more robust synchronization
                                     successCount.getAndIncrement();
                                     if (successCount.get() == selectedBooks.size()) {
                                         Toast.makeText(this, "Đã cho mượn " + successCount + " sách thành công", Toast.LENGTH_SHORT).show();
                                         fetchBorrowedBooks(userId);
+
+                                        borrowedBooksAdapter.clearSelection();
                                     }
                                 })
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(this, "Lỗi khi cập nhật sách mượn", Toast.LENGTH_SHORT).show();
                                     Log.e(TAG, "Lỗi khi cập nhật sách mượn", e);
                                 });
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Lỗi khi xóa sách khỏi danh sách", Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "Lỗi khi xóa sách khỏi danh sách", e);
                     });
         }
     }
@@ -109,7 +115,7 @@ public class AdminActivity extends AppCompatActivity {
             return;
         }
 
-        String userId = qrResultText.getText().toString().replace("Scanned ID: ", "");
+        String userId = qrResultText.getText().toString();
         AtomicInteger successCount = new AtomicInteger();
 
         for (BorrowedBook book : selectedBooks) {
@@ -124,16 +130,14 @@ public class AdminActivity extends AppCompatActivity {
                                     if (successCount.get() == selectedBooks.size()) {
                                         Toast.makeText(this, "Đã trả " + successCount + " sách thành công", Toast.LENGTH_SHORT).show();
                                         fetchBorrowingBooks(userId);
+
+                                        borrowedBooksAdapter.clearSelection();
                                     }
                                 })
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(this, "Lỗi khi cập nhật sách trả", Toast.LENGTH_SHORT).show();
                                     Log.e(TAG, "Lỗi khi cập nhật sách trả", e);
                                 });
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Lỗi khi xóa sách khỏi danh sách mượn", Toast.LENGTH_SHORT).show();
-                        Log.e(TAG, "Lỗi khi xóa sách khỏi danh sách mượn", e);
                     });
         }
     }
@@ -141,13 +145,17 @@ public class AdminActivity extends AppCompatActivity {
     private boolean isBorrowedBooksView = true;
 
     private void toggleViewMode() {
-        String userId = qrResultText.getText().toString().replace("Scanned ID: ", "");
+        String userId = qrResultText.getText().toString();
         if (isBorrowedBooksView) {
             fetchBorrowingBooks(userId);
-            ((Button) findViewById(R.id.toggleView)).setText("Chuyển sang Sách đã mượn");
+            returnBtn.setVisibility(View.VISIBLE);
+            lendBtn.setVisibility(View.GONE);
+            ((Button) findViewById(R.id.toggleView)).setText("Xem danh sách đăng ký");
         } else {
             fetchBorrowedBooks(userId);
-            ((Button) findViewById(R.id.toggleView)).setText("Chuyển sang Mượn sách");
+            returnBtn.setVisibility(View.GONE);
+            lendBtn.setVisibility(View.VISIBLE);
+            ((Button) findViewById(R.id.toggleView)).setText("Xem danh sách đang mượn");
         }
         isBorrowedBooksView = !isBorrowedBooksView;
     }
@@ -179,10 +187,12 @@ public class AdminActivity extends AppCompatActivity {
         if (result != null) {
             String scannedId = result.getContents();
             if (scannedId != null) {
-                qrResultText.setText("Scanned ID: " + scannedId);
+                qrResultText.setText(scannedId);
                 fetchUserData(scannedId);
+                lendBtn.setVisibility(View.VISIBLE);
+                toggleViewBtn.setVisibility(View.VISIBLE);
+                userEmailText.setVisibility(View.VISIBLE);
             } else {
-                qrResultText.setText("Không tìm thấy kết quả");
                 Toast.makeText(this, "Không thể quét mã QR", Toast.LENGTH_SHORT).show();
             }
         }

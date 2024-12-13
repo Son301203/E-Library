@@ -10,6 +10,8 @@ public class BorrowedBook {
     private String image;
     private long borrowedAt;
 
+    private int count = 1;
+
     // Default constructor required for Firestore
     public BorrowedBook() {}
 
@@ -88,5 +90,13 @@ public class BorrowedBook {
 
     public void setBorrowedAt(long borrowedAt) {
         this.borrowedAt = borrowedAt;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }

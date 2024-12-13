@@ -62,12 +62,12 @@ public class RegisteredBooksActivity extends AppCompatActivity {
                     .document(book.getId())
                     .delete()
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(this, "Book unregistered: " + book.getTitle(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Hủy đăng ký mượn sách: " + book.getTitle(), Toast.LENGTH_SHORT).show();
                         borrowedBooks.remove(book);
-                        adapter.notifyDataSetChanged();
+                        adapter.clearSelection();
                     })
                     .addOnFailureListener(e ->
-                            Toast.makeText(this, "Failed to unregister: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                            Toast.makeText(this, "Không thể hủy đăng ký " + e.getMessage(), Toast.LENGTH_SHORT).show());
         }
     }
 
@@ -86,7 +86,7 @@ public class RegisteredBooksActivity extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(this, "Failed to load borrowed books: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Không thể tải danh sách đăng ký: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
     }
 }

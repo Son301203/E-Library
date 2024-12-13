@@ -45,9 +45,10 @@
         android:layout_below="@id/scanner"
         android:layout_marginTop="16dp"
         android:textSize="16sp"
-        android:text="Kết quả QR quét sẽ hiển thị tại đây"
         android:textColor="#333333"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:visibility="gone"
+        />
 
     <!-- Hiển thị email người dùng -->
     <TextView
@@ -57,7 +58,7 @@
         android:layout_below="@id/text"
         android:layout_marginTop="8dp"
         android:textSize="16sp"
-        android:text="Email người dùng sẽ hiển thị tại đây"
+        android:visibility="gone"
         android:textColor="#333333"
         android:padding="16dp" />
 
@@ -69,22 +70,7 @@
         android:layout_below="@id/userEmail"
         android:layout_marginTop="12dp"
         android:backgroundTint="#4F91D7"
-        android:text="Mượn sách đã chọn"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:textSize="16sp"
-        android:padding="12dp"
-        android:textColor="@android:color/white" />
-
-    <!-- Nút Chuyển sang sách mượn -->
-    <Button
-        android:id="@+id/toggleView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/lendButton"
-        android:layout_marginTop="12dp"
-        android:backgroundTint="#4F91D7"
-        android:text="Chuyển sang sách mượn"
+        android:text="Cho mượn các sách đã chọn"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="16sp"
@@ -96,10 +82,25 @@
         android:id="@+id/returnButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toggleView"
+        android:layout_below="@id/lendButton"
         android:layout_marginTop="12dp"
         android:backgroundTint="#4F91D7"
-        android:text="Trả sách"
+        android:text="Trả các sách đã chọn"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:textColor="@android:color/white" />
+
+    <!-- Nút Chuyển sang sách mượn -->
+    <Button
+        android:id="@+id/toggleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/returnButton"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#4F91D7"
+        android:text="Xem danh sách đang mượn"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="16sp"
@@ -111,7 +112,7 @@
         android:id="@+id/borrowedBooksList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/returnButton"
+        android:layout_below="@id/toggleView"
         android:layout_marginTop="8dp"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp" />

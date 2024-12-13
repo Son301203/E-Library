@@ -40,6 +40,7 @@ public class BookReturnAdapter extends android.widget.ArrayAdapter<BorrowedBook>
         ImageView bookImage = convertView.findViewById(R.id.bookImage);
         TextView bookTitle = convertView.findViewById(R.id.bookTitle);
         TextView bookAuthor = convertView.findViewById(R.id.bookAuthor);
+        TextView bookCount = convertView.findViewById(R.id.bookCount); // Thêm TextView hiển thị số lượng
 
         // Get the current book
         BorrowedBook book = bookReturn.get(position);
@@ -49,7 +50,16 @@ public class BookReturnAdapter extends android.widget.ArrayAdapter<BorrowedBook>
         bookAuthor.setText(book.getAuthor());
         Glide.with(context).load(book.getImage()).into(bookImage);
 
+        // Hiển thị số lượng sách
+        if (book.getCount() > 1) {
+            bookCount.setVisibility(View.VISIBLE);
+            bookCount.setText("x" + book.getCount());
+        } else {
+            bookCount.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
+
 
 }
