@@ -20,7 +20,7 @@ public class BorrowingBookActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private ListView booksListView;
-    private BorrowingBookAdapter adapter;
+    private BookAdapter adapter;
     private List<Book> borrowingBooks;
 
     @Override
@@ -33,7 +33,7 @@ public class BorrowingBookActivity extends AppCompatActivity {
 
         booksListView = findViewById(R.id.booksListViewBorrowing);
         borrowingBooks = new ArrayList<>();
-        adapter = new BorrowingBookAdapter(this, borrowingBooks);
+        adapter = new BookAdapter(this, borrowingBooks, BookAdapter.ViewType.BORROWING_BOOKS);
         booksListView.setAdapter(adapter);
 
         ImageView backIcon = findViewById(R.id.backIcon);
@@ -54,7 +54,6 @@ public class BorrowingBookActivity extends AppCompatActivity {
                     borrowingBooks.clear();
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                         Book book = document.toObject(Book.class);
-//                        book.setId(document.getId()); // Gán ID của tài liệu từ Firestore
                         borrowingBooks.add(book);
                     }
                     adapter.notifyDataSetChanged();

@@ -20,7 +20,7 @@ public class RegisteredBooksActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private ListView booksListView;
-    private BorrowedBooksAdapter adapter;
+    private BookAdapter adapter;
     private List<Book> borrowedBooks;
 
     @Override
@@ -37,7 +37,7 @@ public class RegisteredBooksActivity extends AppCompatActivity {
 
         booksListView = findViewById(R.id.booksListView);
         borrowedBooks = new ArrayList<>();
-        adapter = new BorrowedBooksAdapter(this, borrowedBooks);
+        adapter = new BookAdapter(this, borrowedBooks, BookAdapter.ViewType.BORROWED_BOOKS);
         booksListView.setAdapter(adapter);
 
         Button unregisterButton = findViewById(R.id.unregisterButton);

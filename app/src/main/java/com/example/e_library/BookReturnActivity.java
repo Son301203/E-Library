@@ -15,7 +15,7 @@ public class BookReturnActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore db;
     private ListView booksListView;
-    private BookReturnAdapter adapter;
+    private BookAdapter adapter;
     private List<Book> returnBook;
 
     @Override
@@ -28,7 +28,7 @@ public class BookReturnActivity extends AppCompatActivity {
 
         booksListView = findViewById(R.id.booksListViewBorrowing);
         returnBook = new ArrayList<>();
-        adapter = new BookReturnAdapter(this, returnBook);
+        adapter = new BookAdapter(this, returnBook, BookAdapter.ViewType.RETURNED_BOOKS);
         booksListView.setAdapter(adapter);
 
         ImageView backIcon = findViewById(R.id.backIcon);

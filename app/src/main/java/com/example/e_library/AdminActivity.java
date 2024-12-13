@@ -28,7 +28,7 @@ public class AdminActivity extends AppCompatActivity {
     private TextView userEmailText;
     private ListView borrowedBooksListView;
     private FirebaseFirestore db;
-    private BorrowedBooksAdapter borrowedBooksAdapter;
+    private BookAdapter borrowedBooksAdapter;
     private List<Book> borrowedBooksList;
     private Button returnBtn;
     private Button lendBtn;
@@ -51,7 +51,7 @@ public class AdminActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         borrowedBooksList = new ArrayList<>();
-        borrowedBooksAdapter = new BorrowedBooksAdapter(this, borrowedBooksList);
+        borrowedBooksAdapter = new BookAdapter(this, borrowedBooksList, BookAdapter.ViewType.BORROWED_BOOKS);
         borrowedBooksListView.setAdapter(borrowedBooksAdapter);
 
         scanBtn.setOnClickListener(v -> {
